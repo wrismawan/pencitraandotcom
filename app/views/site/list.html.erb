@@ -1,0 +1,80 @@
+
+<ul class="nav navbar-nav">
+    <li><a href="?">All</a>
+  </li>
+    <li><a href="?tokoh=Jokowi">Jokowi</a>
+  </li>
+    <li><a href="?tokoh=Prabowo">Prabowo</a>
+  </li>
+    <li><a href="?tokoh=Arb">ARB</a>
+  </li>
+    <li><a href="?tokoh=Winht">WIN-HT</a>
+  </li>
+    <li><a href="?tokoh=Gita">Gita Wirjawan</a>
+  </li>
+    <li><a href="?tokoh=Dahlan">Dahlan Iskan</a>
+  </li>
+</ul>
+    
+<br><br><br>
+
+
+<% if request.GET["tokoh"] %>
+    
+    <% if flash[:alert] %>
+        <div class="alert-box"><%= flash[:alert] %></div>
+    <% end %>
+    <form action="/site/admin_submit" method="post" accept-charset="utf-8">
+        <input type="text" name="url" value="" placeholder="submit link tentang <%= request.GET['tokoh'] %> di sini">
+        <input type="submit" value="submit">
+    </form>
+
+<% else %>
+
+    
+    <h1>Jumlah User : <%= @users.count %> </h1>
+<% end %>
+
+<% @users.each do |u| %>
+
+<h3><%= u.email %> | <%= u.username %></h3>
+    
+<% end %>
+
+    <% @links.each do |l| %>
+        <hr>
+        <div class="item">
+            <div class="image"><img src="<%= l.image_url %>" width="200px" /></div>
+            <div class="right">
+                <div class="title"><b><%= l.title %></b></div><br>
+                <div class="description"><%= l.description %> - <span class="url" onClick="window.location = '<%= l.url %>'" ><%= l.host %></span></div>
+            </div>
+            <div style="float:left">
+                <h1><%= l.tokoh %></h1>
+                <% if l.verified %>
+                    <form action="/site/verify" method="post" accept-charset="utf-8">
+                        <input type="hidden" name="id" value="<%= l.id %>">
+                        <input type="hidden" name="verify" value="false">
+                        <input type="submit" value="Unverify" style="background-color: red">
+                    </form>
+                <% else %>
+                    <form action="/site/verify" method="post" accept-charset="utf-8">
+                        <input type="hidden" name="id" value="<%= l.id %>">
+                        <input type="hidden" name="verify" value="true">
+                        <input type="submit" value="Verify" style="background-color: green">
+                    </form>
+                    <form action="/site/delete" method="post" accept-charset="utf-8">
+                        <input type="hidden" name="id" value="<%= l.id %>">
+                        <input type="submit" value="DELETE" style="background-color: orange"  onclick="return confirm('Are you sure want to delete');">
+                    </form>
+                <% end %>
+            </div>
+        </div>
+        <div style="height: 200px;"></div>
+        <% l.comments.each do |c| %>
+            <center>
+                <p><%= c.sender %> - <%= c.content %> | <a href="/comment/delete/<%= c.id %>" onclick="return confirm('Are you sure want to delete');">x</a> </p><br>
+            </center>
+        <% end %>
+        <div class="break"></div>
+    <% end %>

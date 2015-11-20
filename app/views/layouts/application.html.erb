@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pencitraan.com | Situs No.1 Tentang Pencitraan</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pencitraan.com adalah situs independent bukan milik partai manapun. Situs ini ditujukan untuk kepentingan masyarakat luas. Bertujuan untuk menyeimbangkan persepsi masyarakat terhadap dampak Pencitraan yang bisa berbahaya."/>
+  <meta name="og:title" content="Pencitraan.com | Situs No.1 Tentang Pencitraan"/>
+  <meta name="og:type" content="movie"/>
+  <meta name="og:url" content="http://pencitraan.com"/>
+  <meta name="og:image" content="http://pencitraan.com/img/<%= cookies[:tokoh].downcase %>.png"/>
+  <meta name="og:site_name" content="Pencitraan.com"/>
+  <meta name="og:description" content="Pencitraan.com adalah situs independent bukan milik partai manapun. Situs ini ditujukan untuk kepentingan masyarakat luas. Bertujuan untuk menyeimbangkan persepsi masyarakat terhadap dampak Pencitraan yang bisa berbahaya."/>
+
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/foundation.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
+     
+    <script src="js/vendor/modernizr.js"></script>
+
+
+</head>
+<body>
+
+
+<%= yield %>
+
+</body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-19098638-15', 'pencitraan.com');
+  ga('send', 'pageview');
+
+</script>
+</html>

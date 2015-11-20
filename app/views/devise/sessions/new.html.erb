@@ -1,0 +1,93 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pencitraan.com - Situs No.1 Tentang Pencitraan - ARB</title>
+    	   <link rel="stylesheet" href="/css/responsive.css" />
+	<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+     <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/foundation.css" />
+        <link rel="stylesheet" href="/css/stylelogin.css" />
+             
+        <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
+     
+    <script src="/js/vendor/modernizr.js"></script>
+  </head>
+  <body>
+     <!-- Header and Nav -->
+ 
+
+ 
+  <!-- End Header and Nav -->
+ 
+ 
+  <!-- First Band (Image) -->
+ 
+  <div class="row">
+    <div class="large-12 columns">
+    <center class="logologins">
+      <img src="/img/logo.png">
+ </center>
+    </div>
+  </div>
+  <!-- Second Band (Image Left with Text) -->
+  <div class="row signins">
+    <div class="large-12 columns">
+    <center>
+			<div class="sign-in">
+			Masuk
+			</div>
+	</center>
+    </div>
+  </div>
+ 
+  <!-- Third Band (Image Right with Text) -->
+ 
+  <div class="row logins">
+    <div class="large-12 columns">
+      <center>
+	<div id="login">
+
+                <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+
+			<span class="fontawesome-user"></span><input type="text" required name="user[email]" value="Email" onBlur="if(this.value=='')this.value='Email'" onFocus="if(this.value=='Email')this.value='' "> <!-- JS because of IE support; better: placeholder="Username" -->
+			<span class="fontawesome-lock"></span><input type="password" required name="user[password]" value="Password" onBlur="if(this.value=='')this.value='Password'" onFocus="if(this.value=='Password')this.value='' "> <!-- JS because of IE support; better: placeholder="Password" -->
+			<div class="lupa" align="left">
+			<a href="">Lupa Password?</a>
+			</div>
+
+                         <input type="hidden" name="user[remember_me]" value="1">
+                        
+                        <input type="submit" value="Login">
+			
+
+                <% end %>
+	</div>
+	</center>
+	 </div>
+
+  </div>
+  <div class="row logins">
+    <div class="large-12 columns">
+    <center>
+    <div class="garis">
+ <hr>
+ </div>
+ 
+ <span class="daftars">
+ Belum daftar? <a href="/users/sign_up" class="sekarang"> Daftar sekarang</a>
+ </span>
+ </div>
+ </center>
+ </div>
+ </div>
+ 
+  <!-- Footer -->
+     
+    </body>
+</html>
+

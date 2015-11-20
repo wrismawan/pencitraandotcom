@@ -1,0 +1,165 @@
+    <div class="navbar navbar-inverse navbar-fixed-top bgnav" role="navigation">
+      <div class="container">
+      <div class="text-pencitraan">
+      	Situs no.1 tentang Pencitraan
+      </div>
+      <center>
+        <img src="/img/logo.png" class="logo"/>
+        </center>
+         </div>
+        <div class="navbar-header">
+       
+		</div>
+	</div>
+</div>
+
+<div class="blackdop">
+<center>
+    <img src="/img/jokowi.png" class="jokowi"/>
+</center>
+	</div>
+
+    
+    <center>
+    <div class="maincontent">
+    <div class="row">
+      <div class="large-12 columns">
+          <div class="mainfont">Sudah ada <span class="coloring"><%= @links.count %></span> berita disubmit sejauh ini. <br>
+      </div>
+        <% if flash[:alert] %>
+
+        <br><br>
+        <div class="alert-box"><%= flash[:alert] %></div>
+
+        <% end %>
+
+
+        <br><br>
+        <form action="/" method="post" accept-charset="utf-8">
+        <input type="text" name="url" placeholder="paste link mengenai pencitraan Jokowi di sini" style="width: 500px;">
+        <input type="submit" class="button" value="submit link">
+        </form>
+    </div>
+    </div>
+</center>
+
+<center>
+    <% @links.each do |l| %>
+
+
+    <div class="panel news">
+         <div class="photo" style="background:url(<%= l.image_url %>); background-repeat:no-repeat; background-position: center; cursor:pointer;" onClick="window.location= '<%= l.url %>'">
+<!-- 	 <div class="button small round white buttonstyle2 tooltips" href="javascript:void(0);">
+           <div class="span" align="left">Pencitraan?
+               <a href="#" class="buttonyes">
+               <img src="img/yes.png"/>
+               </a>
+                <a href="#" class="buttonno">
+               <img src="img/no.png"/>
+               </a>
+           </div>
+           <img src="img/tick.png" class="tick"/>
+           0
+         </div>
+-->
+         </div>
+         <div class="title" align="left" onClick="window.location= '<%= l.url %>'" style="cursor:pointer"><%= l.title %></div>
+         <p class="fewnews" align="left"><%= l.description %> - <a href="<%= l.url %>" class="linkto"><%= l.host %></a></p>
+	 <hr class="linenews"/>     
+         <div class="field--wrapper">
+                    <% if cookies[:pencitraan_name] %>
+                        <% if cookies[:image] %> 
+                            <form action="/comment/postcomment" method="post" accept-charset="utf-8">
+                                <label for="lname">Your comment</label>
+                                <input type="hidden" name="link_id" value="<%= l.id %>">
+                                <input name="comment" placeholder="Add a comment..." class="comment" />
+                            </form>
+                        <% else %>
+                        
+                        <div style="width: 320px; margin-top: 75px;">
+                            
+                            <form action="/comment/set_image" method="post" accept-charset="utf-8">
+                                <% for i in 1..7 %> 
+                                    <input type="radio" name="image_url" value="<%= i %>"><img src="/img/<%= i %>.png" />
+                                <% end %>
+                                <br><br>
+                                <input type="submit" value="Pilih" class="button">
+
+                            </form>
+
+                        </div>
+                        <% end %>
+                    <% else %>
+                        <form action="/comment/set_username" method="post" accept-charset="utf-8">
+                            <label for="lname">Set username</label>
+                            <input name="username" placeholder="set your username..." class="comment" />
+                        </form>
+                    <% end %>
+	 </div>     
+    </div>
+<!--    <div class="panel expression">
+        <div class="photo2wrap">
+            <div class="photowrap">
+                <img src="/img/halo.png" class="photopro shadow"/>
+                <img src="/img/yes.png" class="agreement"/>
+            </div>
+            <div class="photowrap">
+                <img src="/img/halo2.png" class="photopro shadow"/>
+                <img src="/img/no.png" class="agreement"/>
+            </div>
+        </div>
+    </div>
+-->
+    <div class="panel commentary-box">
+        <% l.comments.order("created_at ASC").each do |c| %>
+    	<div class="commentary">
+            <div class="photowrap">
+                <img src="<%= c.image_url %>" class="photopro shadow commentphoto"/>
+            </div>
+            <div class="name">
+                <%= c.sender %>
+            </div>
+            <br>
+            <div class="commentarycomment" align="left">
+                "<%= c.content %>"
+            </div>
+            <div class="commentarycomment2" align="left">
+            </div>
+        </div>
+        <% end %>
+    </div>
+
+    <br>
+    <% end %>
+    
+ </center> 
+    
+    <script src="/js/vendor/jquery.js"></script>
+    <script src="/js/foundation.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+  var onClass = "on";
+  var showClass = "show";
+  
+  $("input").bind("checkval",function(){
+    var label = $(this).prev("label");
+    if(this.value !== ""){
+      label.addClass(showClass);
+    } else {
+      label.removeClass(showClass);
+    }
+  }).on("keyup",function(){
+    $(this).trigger("checkval");
+  }).on("focus",function(){
+    $(this).prev("label").addClass(onClass);
+  }).on("blur",function(){
+      $(this).prev("label").removeClass(onClass);
+  }).trigger("checkval");
+});
+
+    </script>
+    <script>
+      $(document).foundation();
+    </script>
+
+

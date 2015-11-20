@@ -1,0 +1,272 @@
+<div class="navbar navbar-inverse">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+            <img src="img/logo.png" class="logo"/>
+            </a>
+          
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                 <li><a href="/">Home</a></li>
+                 <li <% if @tokoh == 'Jokowi' %> class="active" <% end %> ><a href="/Jokowi">Jokowi</a>
+                 <% if @tokoh == 'Jokowi' %> <span class="label"></span> <% end %> 
+                 
+              </li>
+              <li <%if @tokoh == 'Prabowo' %> class="active" <% end %>><a href="/Prabowo">Prabowo</a>
+                 <% if @tokoh == 'Prabowo' %> <span class="label"></span> <% end %> 
+              </li>
+                <li <%if @tokoh == 'Arb' %> class="active" <% end %>><a href="/Arb">ARB</a>
+                 <% if @tokoh == 'Arb' %> <span class="label"></span> <% end %> 
+              </li>
+                <li <%if @tokoh == 'Winht' %> class="active" <% end %>><a href="/Winht">WIN-HT</a>
+                 <% if @tokoh == 'Winht' %> <span class="label"></span> <% end %> 
+              </li>
+                <li <%if @tokoh == 'Gita' %> class="active" <% end %>><a href="/Gita">Gita Wirjawan</a>
+                 <% if @tokoh == 'Gita' %> <span class="label"></span> <% end %> 
+              </li>
+                <li <%if @tokoh == 'Dahlan' %> class="active" <% end %>><a href="/Dahlan">Dahlan Iskan</a>
+                 <% if @tokoh == 'Dahlan' %> <span class="label"></span> <% end %> 
+              </li>
+             </ul>
+
+             
+           <ul class="nav navbar-nav navbar-right">
+
+            <% if current_user %>
+            <li class="dropdown">
+            <a  href="/users/sign_out" >Hi, <%= current_user.username %> | Log out</a>
+            </li>
+            <% else %>
+            <li>
+                <a href="/users/sign_up" class="signup">
+                Daftar
+                </a>
+            </li>          
+            <li class="dropdown">
+            <a  href="/users/sign_in" >Masuk</a>
+          </li>
+        <% end %> 
+      
+        </ul>
+        
+          </div><!--/.nav-collapse -->
+         
+        </div>
+      </div>
+
+<div class="blackdop">
+<div class="whitedop">
+	<div class="container">
+	
+		<div class="text-pencitraan">
+          	Situs no.1 tentang Pencitraan
+</div>
+
+<span class="textblock">
+<a href="#">
+<div class="text-pencitraan2">
+	   Apakah Pencitraan itu?
+</div>
+</a>
+<a href="#">
+<div class="text-pencitraan2">
+	   Kenapa dibuat Pencitraan.com?
+</div>
+</a>
+<a href="#">
+<div class="text-pencitraan2">
+	   Bantu kami
+</div>
+</a>
+
+
+
+
+<div class="text-pencitraan3">
+<b>Rules:</b> <img src="/img/upvote.png"/>>10 = dianggap Pencitraan
+</div>
+
+
+<div class="custom-follow-button text-pencitraan2">
+  <a href="https://twitter.com/intent/user?screen_name=pencitraancom" target="_blank" alt="Follow realestatemeant">
+    <i class="btn-icon"></i>
+    <span class="btn-text">Follow @PencitraanCom</span>
+  </a>
+</div>
+
+
+</span>
+
+ </div>
+</div>
+<div class="container">
+                                                <img src="/img/<%= @tokoh.downcase %>.png" class="jokowi"/>
+   	  				    	<center>
+	<div class="large-12 columns" style="margin-top: -100px; margin-left: 300px; width: 540px;position:relative:display:inline-block;">
+                                    <div class="bantukami">Bantu kami mengumpulkan berita-berita <%= @tokoh %> yang terindikasi Pencitraan</div>
+                                        
+                                     <form action="/" method="post" accept-charset="utf-8" style="margin-top:10px;">
+                                      <label class="labels" style="margin-top:-10px;">Terimakasih! Silakan Enter untuk submit!</label>
+                                      <input type="text" name="url" placeholder="Paste link mengenai pencitraan <%= @tokoh %> disini" />
+                                     </form>   
+				    </div>
+	</center>
+</div>
+
+
+	</div>
+
+    
+    <center>
+    <div class="maincontent">
+      <% if flash[:alert] %>
+    <div class="row" style="height: 100px">
+          <div class="alert-box"><%= flash[:alert] %></div>
+      <% else %>
+    <div class="row" style="height: 10px">
+      <% end %>
+      <div class="large-12 columns" style="height: 10px">
+          <div class="mainfont" style="height: 10px; position:absolute; margin-left: 35%;">Sudah ada <span class="coloring"><%= @links.count %></span> berita disubmit sejauh ini. </div>
+      </div>
+    </div>
+    </div>
+</center>
+
+<div class="container">
+    <center class="positioncenter">
+
+
+
+
+        <% @links.each do |link| %>
+ 		<div class="panel news">
+ 		  <div class="rating_buttons rating_buttons_wrapper">
+		<div class="upvote_with_number">
+				<div class="rating_options">
+                                                <a href="/vote_up/<%= link.id %>" class="lil_button rate_up">
+							<div class="upvoteimg"></div>
+							<center>
+							<div class="total">
+                                                            <%= link.vote_count %>
+							</div>
+							</center>
+						</a>
+						
+							<a href="/vote_down/<%= link.id %>" class="lil_button rate_down">
+						
+						</a>
+				
+				</div>
+		</div>
+</div>
+
+                <div class="photo" style="background:url(<%= link.image_url %>); background-repeat:no-repeat; background-position: center; cursor:pointer; background-size: 240px auto;" onClick="window.location= '<%= link.url %>'">
+ 		</div>
+                <a href="<%= link.url %>" class="title"><div class="title" align="left"><%= link.title %></div></a>
+                <p class="fewnews" align="left"><%= link.description %> - <a href="<%= link.url %>" class="linkto"><%= link.host %></a></p>
+                <% if link.vote_count > 9 %>
+                <img class="cap" src="/img/cappencitraan2.png"/>
+                <% end %>
+			<hr class="linenews"/>     
+                        <div class="field--wrapper">
+                            <% if current_user %>
+                                          <form action="/comment/postcomment" method="post" accept-charset="utf-8">
+                                              <label for="lname">Your comment</label>
+                                              <input type="hidden" name="link_id" value="<%= link.id %>">
+                                              <input name="comment" placeholder="Add a comment..." class="comment" />
+                                          </form>
+                            <% else %>
+                                          <form action="/comment/postcomment" method="post" accept-charset="utf-8">
+                                              <label for="lname">Your comment</label>
+                                              <input type="hidden" name="link_id" value="<%= link.id %>">
+                                              <input name="comment" placeholder="Add a comment..." class="comment" />
+                                          </form>
+                            <% end %>
+			</div>     
+                    </div> 
+        
+        
+
+        <% if link.comments.count > 0 %>
+            <div class="panel commentary-box">
+            <% link.comments.order("created_at ASC").each do |comment| %>
+                    <div class="commentary">
+                    <div class="photowrap">
+                        <img src="<%= comment.image_url %>" class="photopro shadow commentphoto"/>
+                    </div>
+                    <div class="name">
+                        <%= comment.sender %>
+                    </div>
+                    <br>
+                    <div class="commentarycomment" align="left" style="min-height: 30px;">
+                        "<%= comment.content %>"
+                    </div>
+                    <div class="commentarycomment2" align="left">
+                        <%= time_ago_in_words(comment.created_at) %> ago from Indonesia 
+                    </div>
+                    </div>
+            <% end %>
+            </div>
+        <% end %>
+        <br><br>
+
+        <% end %>
+
+        </div>
+        </div>
+              
+        
+    
+ </center> 
+    </div>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+       <script src="js/bootstrap.min.js"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+     <script type="text/javascript">
+    $(function(){
+  var onClass = "on";
+  var showClass = "show";
+  
+  $("input").bind("checkval",function(){
+    var label = $(this).prev("label");
+    if(this.value !== ""){
+      label.addClass(showClass);
+    } else {
+      label.removeClass(showClass);
+    }
+  }).on("keyup",function(){
+    $(this).trigger("checkval");
+  }).on("focus",function(){
+    $(this).prev("label").addClass(onClass);
+  }).on("blur",function(){
+      $(this).prev("label").removeClass(onClass);
+  }).trigger("checkval");
+});
+
+    </script>
+    
+    <script type="text/javascript">
+    $(function() {
+  // Setup drop down menu
+  $('.dropdown-toggle').dropdown();
+ 
+  // Fix input element click problem
+  $('.dropdown input, .dropdown label').click(function(e) {
+    e.stopPropagation();
+  });
+});
+    </script>
+    <script>
+      $(document).foundation();
+    </script>
+
